@@ -1,5 +1,4 @@
 import { Component, signal, computed } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
 
 export type AffiliationState = 'idle' | 'pending' | 'approved';
@@ -8,7 +7,7 @@ export type AffiliationState = 'idle' | 'pending' | 'approved';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, NgIf],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton],
 })
 export class HomePage {
   // [Arquitectura de Estado]: WritableSignal como única fuente de verdad local reactiva y síncrona

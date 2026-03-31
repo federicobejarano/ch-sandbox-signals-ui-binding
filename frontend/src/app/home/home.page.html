@@ -18,16 +18,18 @@
     <ion-button 
       class="cta-button" 
       [color]="buttonColor()"
+      [class.is-pending]="affiliationState() === 'pending'"
       (click)="toggleAffiliation()">
       {{ buttonText() }}
     </ion-button>
 
-    <!-- [Renderizado Condicional]: Uso de Signal derivado para la visibilidad -->
-    <ion-button 
-      *ngIf="showReferral()"
-      class="referral-button"
-      color="secondary">
-      Invitar amigos
-    </ion-button>
+    <!-- [Control Flow Moderno]: Delegación de la lógica condicional estructural a Angular (@if) -->
+    @if (showReferral()) {
+      <ion-button 
+        class="referral-button"
+        color="secondary">
+        Invitar amigos
+      </ion-button>
+    }
   </div>
 </ion-content>

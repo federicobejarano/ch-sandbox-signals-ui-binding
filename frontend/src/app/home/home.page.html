@@ -14,17 +14,17 @@
   </ion-header>
 
   <div id="container">
-    <!-- Componente UI principal con bindings básicos e interpolación -->
+    <!-- [UI Reactiva]: Consumo de Computed Signals para enlazar propiedades dinámicamente -->
     <ion-button 
       class="cta-button" 
-      [color]="affiliationState === 'pending' ? 'medium' : 'primary'"
+      [color]="buttonColor()"
       (click)="toggleAffiliation()">
-      {{ affiliationState === 'pending' ? 'Cancelar' : 'Afiliate' }}
+      {{ buttonText() }}
     </ion-button>
 
-    <!-- Renderizado condicional primitivo simulando un estado pendiente -->
+    <!-- [Renderizado Condicional]: Uso de Signal derivado para la visibilidad -->
     <ion-button 
-      *ngIf="affiliationState === 'pending'"
+      *ngIf="showReferral()"
       class="referral-button"
       color="secondary">
       Invitar amigos

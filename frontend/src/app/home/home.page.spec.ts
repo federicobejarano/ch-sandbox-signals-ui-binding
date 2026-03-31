@@ -25,4 +25,47 @@ describe('HomePage', () => {
     expect(buttonElement).toBeTruthy(); // Falla aquí si el botón no existe
     expect(buttonElement.textContent?.trim()).toBe('Afiliate');
   });
+
+  it('debería cambiar al estado "pending" tras el primer click y actualizar la vista', () => {
+    // [TDD - Fase Roja/Verde] Simular el clic del usuario en el botón principal.
+    const buttonElement: HTMLElement = fixture.nativeElement.querySelector('.cta-button');
+    buttonElement.click();
+    fixture.detectChanges(); // Forzamos la detección de cambios de Angular tras el evento.
+
+    // Verificamos que el estado interno se mutó correctamente
+    expect(component.affiliationState).toBe('pending');
+
+    // Comprobamos la interpolación reactiva en el texto del botón
+    expect(buttonElement.textContent?.trim()).toBe('Cancelar');
+    
+    // Verificamos que el color cambió a 'medium'
+    expect(buttonElement.getAttribute('color')).toBe('medium');
+
+    // Verificamos que aparece el botón secundario para referidos en estado pending
+    const secondaryButton: HTMLElement = fixture.nativeElement.querySelector('.referral-button');
+    expect(secondaryButton).toBeTruthy();
+    expect(secondaryButton.textContent?.trim()).toBe('Invitar amigos');
+  });
+
+  it('debería regresar al estado "idle" tras un segundo click (cancelar)', () => {
+    // Forzamos el estado a pending para preparar el escenario
+    component.affiliationState = 'pending';
+    fixture.detectChanges();
+
+    // Simulamos el clic del usuario (intentando cancelar la operación pendiente)
+    const buttonElement: HTMLElement = fixture.nativeElement.querySelector('.cta-button');
+    buttonElement.click();
+    fixture.detectChanges();
+
+    // Verificamos que el estado interno revirtió a idle
+    expect(component.affiliationState).toBe('idle');
+
+    // Comprobamos la UI revertida
+    expect(buttonElement.textContent?.trim()).toBe('Afiliate');
+    expect(buttonElement.getAttribute('color')).not.toBe('medium'); // O primary
+
+    // Verificamos que el botón secundario desapareció
+    const secondaryButton: HTMLElement = fixture.nativeElement.querySelector('.referral-button');
+    expect(secondaryButton).toBeFalsy();
+  });
 });

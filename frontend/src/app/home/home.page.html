@@ -14,7 +14,20 @@
   </ion-header>
 
   <div id="container">
-    <!-- Componente UI estático mínimo para satisfacer la prueba -->
-    <ion-button class="cta-button">Afiliate</ion-button>
+    <!-- Componente UI principal con bindings básicos e interpolación -->
+    <ion-button 
+      class="cta-button" 
+      [color]="affiliationState === 'pending' ? 'medium' : 'primary'"
+      (click)="toggleAffiliation()">
+      {{ affiliationState === 'pending' ? 'Cancelar' : 'Afiliate' }}
+    </ion-button>
+
+    <!-- Renderizado condicional primitivo simulando un estado pendiente -->
+    <ion-button 
+      *ngIf="affiliationState === 'pending'"
+      class="referral-button"
+      color="secondary">
+      Invitar amigos
+    </ion-button>
   </div>
 </ion-content>

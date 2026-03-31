@@ -8,20 +8,12 @@
   transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+.cta-button {
+  /* Estableciendo color prominente para el CTA en estado "idle" */
+  --background: var(--ion-color-primary);
 
-#container p {
+  font-weight: bold;
   font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  width: 80%;
+  max-width: 300px;
 }

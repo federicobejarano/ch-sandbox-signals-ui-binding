@@ -2,6 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
+        path: 'home',
+        loadComponent: () =>
+            import('./home/home.page')
+                .then(m => m.HomePage),
+    },
+    {
         path: 'register',
         loadComponent: () =>
             import('./pages/registration-form/registration-form')
@@ -15,7 +21,8 @@ export const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'register',
+        // [Integration]: Redirigir al root de Spike 2 para validación del renderizado en browser
+        redirectTo: 'home',
         pathMatch: 'full',
     }
 ];
